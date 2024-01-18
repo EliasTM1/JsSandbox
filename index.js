@@ -1,7 +1,4 @@
-
-
-
-// TODO: 
+// TODO:
 
 // ! push: Adds one or more elements to the end of an array and returns the new length.
 // ! pop: Removes the last element from an array and returns that element.
@@ -17,9 +14,90 @@
 // ! sort: Sorts the elements of an array in place and returns the sorted array.
 // ! reverse: Reverse the elements of an array in place
 
+// ! Closures
 
+var createCounter = function (init) {
+	let counter = init;
 
-determineBuySell(myArray);
+	function increment() {
+		counter++;
+		return counter;
+	}
+
+	function decrement() {
+		counter--;
+		return counter;
+	}
+
+	function reset() {
+		counter = init;
+		return counter;
+	}
+
+	return { increment, decrement, reset };
+};
+
+let contador = createCounter(5);
+console.log(contador.increment());
+console.log(contador.increment());
+console.log(contador.increment());
+console.log(contador.decrement());
+console.log(contador.decrement());
+console.log(contador.decrement());
+console.log(contador.reset());
+
+/**
+ * const counter = createCounter(5)
+ * counter.increment(); // 6
+ * counter.reset(); // 5
+ * counter.decrement(); // 4
+ */
+
+// * To be or not to be:
+
+// var expect = function (val) {
+// 	function toBe(argValue) {
+// 		if (argValue === val) {
+// 			return true;
+// 		} else {
+// 			throw "Not Equal"
+// 		}
+// 	}
+
+// 	function notToBe(argValue) {
+// 		if (argValue !== val) {
+// 			return true;
+// 		}
+//         else {
+//             throw "Equal"
+//         }
+// 	}
+
+// 	return { toBe, notToBe };
+// };
+
+// console.log(expect("Elias").toBe("Elias"))
+
+// var createCounter = function (ogValue) {
+// 	let countss = 0;
+
+// 	function increment() {
+// 		countss++;
+// 		console.log(ogValue + countss);
+// 		return countss + ogValue;
+// 	}
+
+// 	return { increment };
+// };
+
+// const counter = createCounter(10);
+// console.log(counter.increment());
+// console.log(counter.increment());
+// console.log(counter.increment());
+// console.log(counter.increment());
+// ! Closures
+
+// determineBuySell(myArray);
 
 let examples = [1, 2, 3, 4, 5, 6, 7];
 // ! SLICE ===========
@@ -103,8 +181,6 @@ months.splice(4, 1, "May");
 console.log(months);
 // ! SPLICE ===========
 
-
-
 // ! Best time to buy and sell
 // *PASSED
 // let myArray = [5, 4, 9, 1, 20, 25, 5];
@@ -120,30 +196,30 @@ console.log(months);
 // ! ERROR
 // function determineBuySell(prices) {
 
-	// for (let i = 0; i < prices.length; i++) {
-	// 	console.log(i);
-	// 	if (minNumber > prices[i] && i !== prices.length - 1) {
-	// 		minNumber = prices[i];
-	// 		minIndex = i;
-	// 		console.log(minNumber);
-	// 	}
-	// }
+// for (let i = 0; i < prices.length; i++) {
+// 	console.log(i);
+// 	if (minNumber > prices[i] && i !== prices.length - 1) {
+// 		minNumber = prices[i];
+// 		minIndex = i;
+// 		console.log(minNumber);
+// 	}
+// }
 
-	// copiedArr = copiedArr.slice(minIndex);
-	// console.log(copiedArr);
+// copiedArr = copiedArr.slice(minIndex);
+// console.log(copiedArr);
 
-	// for (let i = 0; i < copiedArr.length; i++) {
-	// 	if (copiedArr[i] > maxNumber) {
-	// 		maxNumber = copiedArr[i];
-	// 		maxIndex = i;
-	// 		console.log(maxNumber);
-	// 	}
-	// }
+// for (let i = 0; i < copiedArr.length; i++) {
+// 	if (copiedArr[i] > maxNumber) {
+// 		maxNumber = copiedArr[i];
+// 		maxIndex = i;
+// 		console.log(maxNumber);
+// 	}
+// }
 
-	// console.log(minNumber);
-	// console.log(maxNumber);
-	// profit = maxNumber - minNumber;
-	// return profit > 0 ? profit : 0;
+// console.log(minNumber);
+// console.log(maxNumber);
+// profit = maxNumber - minNumber;
+// return profit > 0 ? profit : 0;
 // }
 
 // ! Best time to buy and sell FINISH
