@@ -1,42 +1,23 @@
-// let myArray = [5, 4, 9, 1, 20, 25, 5];
-// let myArray = [7, 1, 5, 3, 6, 4];
-// let myArray = [2,4,1];
-// let myArray = [2,4,1];
-// let myArray = [2,4];
-// let myArray = [7,6,4,3,1]
-// let myArray = [2, 5, 3, 8, 2, 4, 1];
-let myArray = [3, 2, 6, 5, 0, 3];
-function determineBuySell(prices) {
-	let copiedArr, minNumber, maxNumber, minIndex, maxIndex, profit;
-	copiedArr = prices;
-	minNumber = prices[0];
-	maxNumber = 0;
 
-	for (let i = 0; i < prices.length; i++) {
-		console.log(i);
-		if (minNumber > prices[i] && i !== prices.length - 1) {
-			minNumber = prices[i];
-			minIndex = i;
-			console.log(minNumber);
-		}
-	}
 
-	copiedArr = copiedArr.slice(minIndex);
-	console.log(copiedArr);
 
-	for (let i = 0; i < copiedArr.length; i++) {
-		if (copiedArr[i] > maxNumber) {
-			maxNumber = copiedArr[i];
-			maxIndex = i;
-			console.log(maxNumber);
-		}
-	}
+// TODO: 
 
-	console.log(minNumber);
-	console.log(maxNumber);
-	profit = maxNumber - minNumber;
-	return profit > 0 ? profit : 0;
-}
+// ! push: Adds one or more elements to the end of an array and returns the new length.
+// ! pop: Removes the last element from an array and returns that element.
+// ! shift: Removes the first element from an array and returns that element.
+// ! unshift: Adds one or more elements to the beginning of an array and returns the new length.
+// ! concat:  Combines two or more arrays and returns a new array.
+// ! indexOf: Returns the first index at which a given element can be found in the array, or -1 if it is not present.
+// ! includes: Determines whether an array includes a certain element, returning a boolean.
+// ! forEach: Executes a provided function once for each array element.
+// ! map: Creates a new array with the results of calling a provided function on every element in the array.
+// ! filter: Creates a new array with all elements that pass the test implemented by the provided function.
+// ! reduce: Applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
+// ! sort: Sorts the elements of an array in place and returns the sorted array.
+// ! reverse: Reverse the elements of an array in place
+
+
 
 determineBuySell(myArray);
 
@@ -121,3 +102,48 @@ console.log(monthsDel3);
 months.splice(4, 1, "May");
 console.log(months);
 // ! SPLICE ===========
+
+
+
+// ! Best time to buy and sell
+// *PASSED
+// let myArray = [5, 4, 9, 1, 20, 25, 5];
+// let myArray = [7, 1, 5, 3, 6, 4];
+// let myArray = [2,4,1];
+// let myArray = [2,4,1];
+// let myArray = [2,4];
+// let myArray = [7,6,4,3,1]
+// let myArray = [2, 5, 3, 8, 2, 4, 1];
+// *PASSED
+// ! ERROR
+// let myArray = [3, 2, 6, 5, 0, 3];
+// ! ERROR
+// function determineBuySell(prices) {
+
+	// for (let i = 0; i < prices.length; i++) {
+	// 	console.log(i);
+	// 	if (minNumber > prices[i] && i !== prices.length - 1) {
+	// 		minNumber = prices[i];
+	// 		minIndex = i;
+	// 		console.log(minNumber);
+	// 	}
+	// }
+
+	// copiedArr = copiedArr.slice(minIndex);
+	// console.log(copiedArr);
+
+	// for (let i = 0; i < copiedArr.length; i++) {
+	// 	if (copiedArr[i] > maxNumber) {
+	// 		maxNumber = copiedArr[i];
+	// 		maxIndex = i;
+	// 		console.log(maxNumber);
+	// 	}
+	// }
+
+	// console.log(minNumber);
+	// console.log(maxNumber);
+	// profit = maxNumber - minNumber;
+	// return profit > 0 ? profit : 0;
+// }
+
+// ! Best time to buy and sell FINISH
