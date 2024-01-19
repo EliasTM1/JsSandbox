@@ -1,5 +1,6 @@
 // TODO:
 
+// Array Methods
 // ! push: Adds one or more elements to the end of an array and returns the new length.
 // ! pop: Removes the last element from an array and returns that element.
 // ! shift: Removes the first element from an array and returns that element.
@@ -13,41 +14,5 @@
 // ! reduce: Applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 // ! sort: Sorts the elements of an array in place and returns the sorted array.
 // ! reverse: Reverse the elements of an array in place
-
-//  * 2666. Allow One Function Call
-/**
- * @param {Function} fn
- * @return {Function}
- */
-var once = function (fn) {
-    let counter = 0 
-    if(counter === 0) {
-        return function (...args) {
-            if (counter === 0) {
-                console.log(counter)
-                console.log(counter)
-                counter = counter + 1
-                console.log(counter)
-                return fn(...args)
-            }
-        };
-    } 
-};
-
-let bucket = once((a,b,c) => (a + b + c))
-console.log(bucket(1,2,3))
-console.log(bucket(2,3,6))
-let bucketTwo = bucket
-
-
-/**
- * let fn = (a,b,c) => (a + b + c)
- * let onceFn = once(fn)
- *
- * onceFn(1,2,3); // 6
- * onceFn(2,3,6); // returns undefined without calling fn
- */
-
-//  * 2666. Allow One Function Call Finish
 
 
