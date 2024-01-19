@@ -14,37 +14,144 @@
 // ! sort: Sorts the elements of an array in place and returns the sorted array.
 // ! reverse: Reverse the elements of an array in place
 
-// ! Closures
+// ! Function composition:
 
-var createCounter = function (init) {
-	let counter = init;
 
-	function increment() {
-		counter++;
-		return counter;
-	}
 
-	function decrement() {
-		counter--;
-		return counter;
-	}
+// ! ARCHIVE
 
-	function reset() {
-		counter = init;
-		return counter;
-	}
+//  * Count the number of arguments an return that number 
 
-	return { increment, decrement, reset };
-};
+/**
+ * @param {...(null|boolean|number|string|Array|Object)} args
+ * @return {number}
+ */
+var argumentsLength = function(...args) {
+    return args.length
+    };
+    
+    argumentsLength({}, null, "3")
+    
+    /**
+     * argumentsLength(1, 2, 3); // 3
+     */
 
-let contador = createCounter(5);
-console.log(contador.increment());
-console.log(contador.increment());
-console.log(contador.increment());
-console.log(contador.decrement());
-console.log(contador.decrement());
-console.log(contador.decrement());
-console.log(contador.reset());
+//  * Test Case 1
+// function primus(x) {
+// 	return x + 1;
+// }
+// function secundus(x) {
+// 	return x * x;
+// }
+// function aurelius(x) {
+// 	return 2 * x;
+// }
+// //  * Test Case 1
+
+// /**
+//  * @param {Function[]} functions
+//  * @return {Function}
+//  */
+// var compose = function (functions) {
+// 	return function (x) {
+// 		let result = x;
+// 		for (let j = functions.length - 1; j >= 0; j--) {
+// 			result = functions[j](result);
+// 		}
+// 		return result;
+// 	};
+// };
+
+// let useCompose = compose([primus, secundus, aurelius]); // * Composition x times 10 3 times
+// console.log(useCompose(4));
+
+
+// //  * Test Case 1
+// function primero(x) {
+//     return x * 10
+// }
+// function segundo(x) {
+//     return x * 10
+// }
+// function tercero(x) {
+//     return x * 10
+// }
+// //  * Test Case 1
+
+// function sumOne(number) {
+// 	return number + 1;
+// }
+
+// function sumTwo(number) {
+// 	return number + 2;
+// }
+
+// function sumThree(number) {
+// 	return number + 3;
+// }
+
+// function sumFour(number) {
+// 	return number + 4;
+// }
+
+// let useCompose = compose([sumOne, sumTwo, sumThree, sumFour]); // * Composition sum plus one
+//  let useCompose = compose([primero, segundo, tercero]); // * Composition x times 10 3 times
+
+// * Create your reducer
+
+// /**
+//  * @param {number[]} nums
+//  * @param {Function} fn
+//  * @param {number} init
+//  * @return {number}
+//  */
+// var reduceThis = function (nums, fn, init) {
+// 	let acomulador = init;
+// 	if (nums.length === 0) return acomulador;
+
+// 	for (let i = 0; i < nums.length; i++) {
+// 		acomulador =+ fn(acomulador, nums[i]);
+// 	}
+// 	return acomulador;
+// };
+
+// nums = [1, 2, 3, 4];
+// function sumateEsta(accum, curr) {
+// 	return accum + curr;
+// }
+
+// reduceThis(nums, sumateEsta, 0);
+
+// let arr = [0, 10, 20, 30, 50, 62, 145, 1, 2, 3, 3, 2, 1, 5, 6, 4];
+// let result = [];
+
+// var filterMyArr = function (arr, fn) {
+// 	let result = [];
+// 	for (let i = 0; i < arr.length; i++) {
+// 		if (fn(arr[i], i)) {
+// 			result.push();
+// 		}
+// 		if (fn(arr[i]), i) {
+// 			result.push(arr[i]);
+// 		}
+// 	}
+// 	return result;
+// };
+
+// function greaterThan10(n) {
+// 	return n > 10;
+// }
+// function firstIndex(n, i) {
+// 	return i === 0;
+// }
+// function plusOne(n) {
+// 	return n + 1;
+// }
+
+// filterMyArr(arr, greaterThan10);
+// console.log(result);
+
+// * Create your own map:
 
 /**
  * const counter = createCounter(5)
@@ -52,6 +159,53 @@ console.log(contador.reset());
  * counter.reset(); // 5
  * counter.decrement(); // 4
  */
+
+// var mapeando = function (arr, fn) {
+//     let result = []
+// 	for (let i = 0; i < arr.length; i++) {
+//         result.push(fn(arr[i], i))
+//     }
+//     return result
+
+// };
+
+// let myArr = [1, 2, 3, 4, 5, 6];
+
+// function plusone(n) {
+// 	return n + 1;
+// }
+
+// console.log(mapeando(myArr, plusone));
+
+// var createCounter = function (init) {
+// 	let counter = init;
+
+// 	function increment() {
+// 		counter++;
+// 		return counter;
+// 	}
+
+// 	function decrement() {
+// 		counter--;
+// 		return counter;
+// 	}
+
+// 	function reset() {
+// 		counter = init;
+// 		return counter;
+// 	}
+
+// 	return { increment, decrement, reset };
+// };
+
+// let contador = createCounter(5);
+// console.log(contador.increment());
+// console.log(contador.increment());
+// console.log(contador.increment());
+// console.log(contador.decrement());
+// console.log(contador.decrement());
+// console.log(contador.decrement());
+// console.log(contador.reset());
 
 // * To be or not to be:
 
