@@ -1,53 +1,80 @@
-// TODO:
-
-// ! push: Adds one or more elements to the end of an array and returns the new length.
-// ! pop: Removes the last element from an array and returns that element.
-// ! shift: Removes the first element from an array and returns that element.
-// ! unshift: Adds one or more elements to the beginning of an array and returns the new length.
-// ! concat:  Combines two or more arrays and returns a new array.
-// ! indexOf: Returns the first index at which a given element can be found in the array, or -1 if it is not present.
-// ! includes: Determines whether an array includes a certain element, returning a boolean.
-// ! forEach: Executes a provided function once for each array element.
-// ! map: Creates a new array with the results of calling a provided function on every element in the array.
-// ! filter: Creates a new array with all elements that pass the test implemented by the provided function.
-// ! reduce: Applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
-// ! sort: Sorts the elements of an array in place and returns the sorted array.
-// ! reverse: Reverse the elements of an array in place
-
-//  * 2666. Allow One Function Call
+// * 2623. Memoize
 /**
  * @param {Function} fn
  * @return {Function}
  */
-var once = function (fn) {
-    let counter = 0 
-    if(counter === 0) {
-        return function (...args) {
-            if (counter === 0) {
-                console.log(counter)
-                console.log(counter)
-                counter = counter + 1
-                console.log(counter)
-                return fn(...args)
-            }
-        };
-    } 
-};
-
-let bucket = once((a,b,c) => (a + b + c))
-console.log(bucket(1,2,3))
-console.log(bucket(2,3,6))
-let bucketTwo = bucket
-
-
 /**
- * let fn = (a,b,c) => (a + b + c)
- * let onceFn = once(fn)
- *
- * onceFn(1,2,3); // 6
- * onceFn(2,3,6); // returns undefined without calling fn
+ * @param {number, number} agrega
+ * @return {Function}
+ */
+/**
+ * @param {number} fib
+ * @return {Function}
+ */
+/**
+ * @param {number} factorial
+ * @return {Function}
  */
 
-//  * 2666. Allow One Function Call Finish
+// *  Given a function, return a memoized version of that function
+// * memo function === A function that will never be called agin with the same input
+// ! // Possible function
+function agrega(numOne, numTwo) {
+	return numOne + numTwo;
+}
 
+function fib(n) {
+	if (n <= 1) return 1;
+	return fib(n - 1) + fib(n - 2);
+}
 
+function factorial(numero) {
+	if (n <= 1) return 1;
+	return factorial((numero - 1) * 1);
+}
+
+// ! // Possible function
+
+function memoize(fn) {
+	let totalFunctionCalls = 0;
+	let argsCache = {};
+    let results = 0
+	if (argsCache.results)
+	return function (...args) {
+        totalFunctionCalls++
+		let id = Date.now().toString();
+
+		for (let i = 0; i < args.length; i++) {
+			if (argsCache) {
+                
+			}
+		}
+
+		argsCache = {
+			// ...argsCache,
+			id: args,
+		};
+		console.log(argsCache);
+		console.log(argsCache["id"]);
+	};
+}
+
+let useMemoize = memoize(agrega);
+useMemoize(2, 2);
+useMemoize(2, 2);
+useMemoize();
+useMemoize(1, 2);
+useMemoize();
+
+/**
+ * let callCount = 0;
+ * const memoizedFn = memoize(function (a, b) {
+ *	 callCount += 1;
+ *   return a + b;
+ * })
+ * memoizedFn(2, 3) // 5
+ * memoizedFn(2, 3) // 5
+ * console.log(callCount) // 1
+ */
+
+// * 2623. Memoize
