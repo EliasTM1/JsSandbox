@@ -1,4 +1,116 @@
 
+// * 2623. Memoize
+/**
+ * @param {Function} fn
+ * @return {Function}
+ */
+/**
+ * @param {number, number} agrega
+ * @return {Function}
+ */
+/**
+ * @param {number} fib
+ * @return {Function}
+ */
+/**
+ * @param {number} factorial
+ * @return {Function}
+ */
+
+// *  Given a function, return a memoized version of that function
+// * memo function === A function that will never be called agin with the same input
+// ! // Possible function 
+function agrega(numOne, numTwo) {
+	console.log(numOne);
+	return numOne + numTwo;
+}
+
+function fib(n) {
+	if (n <= 1) return 1;
+	return fib(n - 1) + fib(n - 2);
+}
+
+function factorial(numero) {
+	if (n <= 1) return 1;
+	return factorial((numero - 1) * 1);
+}
+
+// ! // Possible function  2623. Memoize
+ 
+function memoize(fn) {
+	let totalFunctionCalls = 1;
+	let argsCache = {};
+
+	return function (...args) {
+		if (args.length >= 1) {
+			// args = args.length > 1 ? args.sort((a,b) => a - b): args
+			if (!argsCache.hasOwnProperty(args)) {
+				argsCache[args] = fn(...args)
+				totalFunctionCalls++
+				return argsCache[args]
+			} else {
+				return argsCache[args]
+			}
+		}
+		return totalFunctionCalls
+	};
+	
+}
+
+
+let useMemoize = memoize(agrega);
+useMemoize(1, 3);
+useMemoize();
+useMemoize(3, 1);
+useMemoize(10, 10);
+useMemoize();
+// useMemoize(2, 2);
+// useMemoize(2, 2);
+// useMemoize();
+// useMemoize(1, 2);
+// useMemoize();
+
+
+
+//  * Sort an array manually
+// let args = [20,25,6,2,1,5,1,8,123]
+
+// for (let index = 0; index <= args.length - 1; index++) {
+// 	for (
+// 		let innerIndex = index + 1;
+// 		innerIndex < args.length;
+// 		innerIndex++
+// 	) {
+// 		console.log(innerIndex);
+// 		if (args[index] > args[innerIndex]) {
+// 			let temporal = args[index];
+// 			args[index] = args[innerIndex];
+// 			args[innerIndex] = temporal;
+// 		}
+// 	}
+// }
+
+// let Person = {
+// 	name: "Elias",
+// 	age: 32,
+// 	ownsCar: false,
+// };
+
+// console.log(Person)
+
+// console.log(Object.keys(Person));
+
+// console.log(Object.values(Person));
+// Person = {...Person, profesion: "pro"}
+// console.log(Object.keys(Person));
+// console.log(Object.values(Person));
+// Person = {...Person, 50: 50}
+// console.log(Object.keys(Person));
+// console.log(Object.values(Person));
+
+// * 2623. Memoize
+
+
 
 //  * 2666. Allow One Function Call
 // /**

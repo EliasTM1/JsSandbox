@@ -1,80 +1,25 @@
-// * 2623. Memoize
-/**
- * @param {Function} fn
- * @return {Function}
- */
-/**
- * @param {number, number} agrega
- * @return {Function}
- */
-/**
- * @param {number} fib
- * @return {Function}
- */
-/**
- * @param {number} factorial
- * @return {Function}
- */
+// ? 2723. Add Two Promises
+// ? Easy
+// Companies
+// ? Given two promises promise1 and promise2, return a new promise. 
+// ? promise1 and promise2 will both resolve with a number.
+// ? The returned promise should resolve with the sum of the two numbers.
+ 
 
-// *  Given a function, return a memoized version of that function
-// * memo function === A function that will never be called agin with the same input
-// ! // Possible function
-function agrega(numOne, numTwo) {
-	return numOne + numTwo;
-}
+// * Example 1:
+// Input: 
+// promise1 = new Promise(resolve => setTimeout(() => resolve(2), 20)), 
+// promise2 = new Promise(resolve => setTimeout(() => resolve(5), 60))
+// Output: 7
+// Explanation: The two input promises resolve with the values of 2 and 5 respectively. The returned promise should resolve with a value of 2 + 5 = 7. The time the returned promise resolves is not judged for this problem.
+// * Example 2:
+// Input: 
+// promise1 = new Promise(resolve => setTimeout(() => resolve(10), 50)), 
+// promise2 = new Promise(resolve => setTimeout(() => resolve(-12), 30))
+// Output: -2
+// Explanation: The two input promises resolve with the values of 10 and -12 respectively. The returned promise should resolve with a value of 10 + -12 = -2.
+ 
 
-function fib(n) {
-	if (n <= 1) return 1;
-	return fib(n - 1) + fib(n - 2);
-}
+// Constraints:
 
-function factorial(numero) {
-	if (n <= 1) return 1;
-	return factorial((numero - 1) * 1);
-}
-
-// ! // Possible function
-
-function memoize(fn) {
-	let totalFunctionCalls = 0;
-	let argsCache = {};
-    let results = 0
-	if (argsCache.results)
-	return function (...args) {
-        totalFunctionCalls++
-		let id = Date.now().toString();
-
-		for (let i = 0; i < args.length; i++) {
-			if (argsCache) {
-                
-			}
-		}
-
-		argsCache = {
-			// ...argsCache,
-			id: args,
-		};
-		console.log(argsCache);
-		console.log(argsCache["id"]);
-	};
-}
-
-let useMemoize = memoize(agrega);
-useMemoize(2, 2);
-useMemoize(2, 2);
-useMemoize();
-useMemoize(1, 2);
-useMemoize();
-
-/**
- * let callCount = 0;
- * const memoizedFn = memoize(function (a, b) {
- *	 callCount += 1;
- *   return a + b;
- * })
- * memoizedFn(2, 3) // 5
- * memoizedFn(2, 3) // 5
- * console.log(callCount) // 1
- */
-
-// * 2623. Memoize
+// promise1 and promise2 are promises that resolve with a number
