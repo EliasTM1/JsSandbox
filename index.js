@@ -1,25 +1,74 @@
-// ? 2723. Add Two Promises
-// ? Easy
-// Companies
-// ? Given two promises promise1 and promise2, return a new promise. 
-// ? promise1 and promise2 will both resolve with a number.
-// ? The returned promise should resolve with the sum of the two numbers.
- 
+/**
+ * @param {Function} fn
+ * @param {Array} args
+ * @param {number} t
+ * @return {Function}
+ */
 
-// * Example 1:
-// Input: 
-// promise1 = new Promise(resolve => setTimeout(() => resolve(2), 20)), 
-// promise2 = new Promise(resolve => setTimeout(() => resolve(5), 60))
-// Output: 7
-// Explanation: The two input promises resolve with the values of 2 and 5 respectively. The returned promise should resolve with a value of 2 + 5 = 7. The time the returned promise resolves is not judged for this problem.
-// * Example 2:
-// Input: 
-// promise1 = new Promise(resolve => setTimeout(() => resolve(10), 50)), 
-// promise2 = new Promise(resolve => setTimeout(() => resolve(-12), 30))
-// Output: -2
-// Explanation: The two input promises resolve with the values of 10 and -12 respectively. The returned promise should resolve with a value of 10 + -12 = -2.
- 
+let args = [2],
+	// t = 20,
+	t = 100,
+	cancelTimeMs = 50;
+let timeOut = 20;
 
-// Constraints:
+function myExampleFunction(x) {
+	// return x * 5;
+	return x**2;
+}
 
-// promise1 and promise2 are promises that resolve with a number
+console.log(t)
+console.log(cancelTimeMs)
+var cancellable = function (fn, args, t) {
+	let itCancels = false;
+    let timeOutId = setTimeout(function () {
+        fn()
+    },t)
+
+    if (t < cancelTimeMs) {
+        return function cancelFn() {
+            fn(...args)
+        }
+        
+        
+    } else 
+    {
+        clearTimeout(timeOutId)
+        return
+    }
+
+    return function cancelFn() {
+        itCancels = cancelTimeMs > t
+        console.log(itCancels)
+    }
+
+};
+
+let cancelFn = cancellable(myExampleFunction, args, timeOut);
+setTimeout(function () {
+    cancelFn()
+}, cancelTimeMs)
+// myBucket()
+
+/**
+ *  const result = [];
+ *
+ *  const fn = (x) => x * 5;
+ *  const args = [2], t = 20, cancelTimeMs = 50;
+ *
+ *  const start = performance.now();
+ *
+ *  const log = (...argsArr) => {
+ *      const diff = Math.floor(performance.now() - start);
+ *      result.push({"time": diff, "returned": fn(...argsArr)});
+ *  }
+ *
+ *  const cancel = cancellable(log, args, t);
+ *
+ *  const maxT = Math.max(t, cancelTimeMs);
+ *
+ *  setTimeout(cancel, cancelTimeMs);
+ *
+ *  setTimeout(() => {
+ *      console.log(result); // [{"time":20,"returned":10}]
+ *  }, maxT + 15)
+ */

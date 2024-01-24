@@ -1,4 +1,198 @@
 
+/**
+ * @param {Function} fn
+ * @param {Array} args
+ * @param {number} t
+ * @return {Function}
+ */
+
+let args = [2],
+	t = 20,
+	// t = 100,
+	cancelTimeMs = 50;
+    // cancelTimeMs = 100
+let timeOut = 20;
+
+function myExampleFunction(x) {
+	return x * 5;
+	// return x**2;
+}
+
+console.log(t);
+console.log(cancelTimeMs);
+var cancellable = function (fn, args, t) {
+	let itCancels = false;
+	let timeOutId = setTimeout(function () {
+		fn();
+	}, t);
+
+	if (t > cancelTimeMs) {
+		return function cancelFn() {
+			clearTimeout(timeOutId);
+		};
+	} else {
+		fn(...args);
+	}
+
+	return function cancelFn() {
+		// itCancels = cancelTimeMs > t
+		console.log(itCancels);
+	};
+};
+
+let cancelFn = cancellable(myExampleFunction, args, timeOut);
+setTimeout(function () {
+	cancelFn();
+}, cancelTimeMs);
+// myBucket()
+
+/**
+ *  const result = [];
+ *
+ *  const fn = (x) => x * 5;
+ *  const args = [2], t = 20, cancelTimeMs = 50;
+ *
+ *  const start = performance.now();
+ *
+ *  const log = (...argsArr) => {
+ *      const diff = Math.floor(performance.now() - start);
+ *      result.push({"time": diff, "returned": fn(...argsArr)});
+ *  }
+ *
+ *  const cancel = cancellable(log, args, t);
+ *
+ *  const maxT = Math.max(t, cancelTimeMs);
+ *
+ *  setTimeout(cancel, cancelTimeMs);
+ *
+ *  setTimeout(() => {
+ *      console.log(result); // [{"time":20,"returned":10}]
+ *  }, maxT + 15)
+ */
+
+
+// Given a positive integer millis, write an asynchronous
+// function that sleeps for millis milliseconds. It can resolve any value.
+
+// * Example 1:
+
+// Input: millis = 100
+// Output: 100
+// Explanation: It should return a promise that resolves after 100ms.
+// let t = Date.now();
+// sleep(100).then(() => {
+//   console.log(Date.now() - t); // 100
+// });
+
+// * Example 2:
+
+// Input: millis = 200
+// Output: 200
+// Explanation: It should return a promise that resolves after 200ms.
+
+// Constraints:
+
+// 1 <= millis <= 1000
+/**
+ * @param {number} millis
+ * @return {Promise}
+ */
+async function sleep(millis) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            resolve("Some")
+        },millis)
+    })
+}
+
+/**
+ * let t = Date.now()
+ * sleep(100).then(() => console.log(Date.now() - t)) // 100
+ */
+
+
+// ? 2723. Add Two Promises
+// ? Easy
+// Companies
+// ? Given two promises promise1 and promise2, return a new promise.
+// ? promise1 and promise2 will both resolve with a number.
+// ? The returned promise should resolve with the sum of the two numbers.
+function promiseOne() {
+	return new Promise(function (resolve, reject) {
+		setTimeout(() => {
+			resolve(2);
+		}, 200);
+	});
+}
+
+function promiseTwo() {
+	return new Promise(function (resolve, reject) {
+		setTimeout(() => resolve(5));
+	}, 300);
+}
+
+/**
+ * @param {Promise} promise1
+ * @param {Promise} promise2
+ * @return {Promise}
+ */
+
+var addTwoPromises = async function (promise1, promise2) {
+    promise1().then(myPromise)
+    promise2().then(myPromise)
+	return new Promise(function (resolve, reject) {
+        resolve()
+		// resolve(resultado + resultTwo);
+	});
+};
+
+addTwoPromises(promiseOne, promiseTwo);
+
+let acommulador = 0;
+function myPromise(valor) {
+	return new Promise(function (resolve, reject) {
+		acommulador += valor;
+		resolve(acommulador);
+	});
+}
+
+// let resultao = promiseOne().then(myPromise)
+// let resultaoDos = promiseTwo().then(myPromise)
+// console.log(resultao.then((valor) => {
+//     acommulador = acommulador + valor
+//     console.log(acommulador)
+//     console.log(valor)
+// }))
+// console.log(resultaoDos.then((valor) => {
+//     acommulador = acommulador + valor
+//     console.log(acommulador)
+//     console.log(valor)
+// }))
+
+console.log(acommulador);
+
+// * Example 1:
+// Input:
+// promise1 = new Promise(resolve => setTimeout(() => resolve(2), 20)),
+// promise2 = new Promise(resolve => setTimeout(() => resolve(5), 60))
+// Output: 7
+// Explanation:
+//* The two input promises resolve with the values of 2 and 5 respectively.
+//* The returned promise should resolve with a value of 2 + 5 = 7.
+//* The time the returned promise resolves is not judged for this problem.
+// * Example 2:
+// Input:
+// promise1 = new Promise(resolve => setTimeout(() => resolve(10), 50)),
+// promise2 = new Promise(resolve => setTimeout(() => resolve(-12), 30))
+// Output: -2
+// Explanation: The two input promises resolve with the values of 10 and -12 respectively. The returned promise should resolve with a value of 10 + -12 = -2.
+
+// Constraints:
+
+// promise1 and promise2 are promises that resolve with a number
+
+
+
 // * 2623. Memoize
 /**
  * @param {Function} fn
