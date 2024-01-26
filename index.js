@@ -1,74 +1,35 @@
-/**
- * @param {Function} fn
- * @param {Array} args
- * @param {number} t
- * @return {Function}
- */
-
-let args = [2],
-	// t = 20,
-	t = 100,
-	cancelTimeMs = 50;
-let timeOut = 20;
-
-function myExampleFunction(x) {
-	// return x * 5;
-	return x**2;
-}
-
-console.log(t)
-console.log(cancelTimeMs)
-var cancellable = function (fn, args, t) {
-	let itCancels = false;
-    let timeOutId = setTimeout(function () {
-        fn()
-    },t)
-
-    if (t < cancelTimeMs) {
-        return function cancelFn() {
-            fn(...args)
-        }
-        
-        
-    } else 
-    {
-        clearTimeout(timeOutId)
-        return
-    }
-
-    return function cancelFn() {
-        itCancels = cancelTimeMs > t
-        console.log(itCancels)
-    }
-
+var TimeLimitedCache = function() {
+    
 };
 
-let cancelFn = cancellable(myExampleFunction, args, timeOut);
-setTimeout(function () {
-    cancelFn()
-}, cancelTimeMs)
-// myBucket()
+/** 
+ * @param {number} key
+ * @param {number} value
+ * @param {number} duration time until expiration in ms
+ * @return {boolean} if un-expired key already existed
+ */
+TimeLimitedCache.prototype.set = function(key, value, duration) {
+    
+};
+
+/** 
+ * @param {number} key
+ * @return {number} value associated with key
+ */
+TimeLimitedCache.prototype.get = function(key) {
+    
+};
+
+/** 
+ * @return {number} count of non-expired keys
+ */
+TimeLimitedCache.prototype.count = function() {
+    
+};
 
 /**
- *  const result = [];
- *
- *  const fn = (x) => x * 5;
- *  const args = [2], t = 20, cancelTimeMs = 50;
- *
- *  const start = performance.now();
- *
- *  const log = (...argsArr) => {
- *      const diff = Math.floor(performance.now() - start);
- *      result.push({"time": diff, "returned": fn(...argsArr)});
- *  }
- *
- *  const cancel = cancellable(log, args, t);
- *
- *  const maxT = Math.max(t, cancelTimeMs);
- *
- *  setTimeout(cancel, cancelTimeMs);
- *
- *  setTimeout(() => {
- *      console.log(result); // [{"time":20,"returned":10}]
- *  }, maxT + 15)
+ * const timeLimitedCache = new TimeLimitedCache()
+ * timeLimitedCache.set(1, 42, 1000); // false
+ * timeLimitedCache.get(1) // 42
+ * timeLimitedCache.count() // 1
  */
