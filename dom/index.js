@@ -44,6 +44,71 @@ function getRandomNumber(min, max) {
 
 	return randomNumber;
 }
+// * Global this === Window in the browser
+// console.log(this)
+
+class Person {
+	constructor(name, age, sex) {
+		this.name = name
+		this.age = age
+		this.sex = sex
+	}
+	talk = function() {
+		console.log(this)
+		// return this
+	}
+}
+
+// * Here THIS refers to the object that owns it
+
+let eliasToscano = new Person("Elias", 29, "Male")
+console.log(eliasToscano.talk())
+
+let jesus = new Person("Jesus", 2024, "Male")
+console.log(jesus.talk())
+
+
+function saySomething () {
+	console.log(this)
+	return this
+}
+
+let myObject = {
+	valueOfThis: saySomething
+}
+console.log(myObject.valueOfThis())
+
+
+// * in this 2 examples the value of this refers to the element that triggered the event
+
+let buttonNuevo =  document.createElement('button')
+buttonNuevo.value = "MONONUCLEOSIS"
+document.body.appendChild(buttonNuevo)
+buttonNuevo.textContent = "Click me please"
+buttonNuevo.addEventListener('click', function() {
+	console.log(this, "this is the value of this ")
+})
+
+
+let headerNuevo =  document.createElement('h1')
+headerNuevo.value = "MONONUCLEOSIS"
+document.body.appendChild(headerNuevo)
+headerNuevo.textContent = "Click me please"
+headerNuevo.addEventListener('click', function() {
+	console.log(this, "this is the value of this ")
+	
+})
+
+
+
+
+
+
+
+
+
+
+
 
 // let header, button, input;
 // header = document.createElement("h1");
