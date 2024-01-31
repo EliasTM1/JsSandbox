@@ -1,56 +1,42 @@
 var TimeLimitedCache = function () {
-	this.countKeys = 0;
-	this.myObjnow = {};
-	this.myTimestamp = Date.now();
+	this.storage = {};
 };
 
 /**
  * @param {number} key
  * @param {number} value
- * @param {number} duration time until expiration in ms
- * @return {boolean} if un-expired key already existed
+ * @param {number} duration
+ * @return {boolean}
  */
 TimeLimitedCache.prototype.set = function (key, value, duration) {
-
 	// * After the time elapsed the key will be deleted (expired)
-	let initialTimeStamp = Date.now();
 	let keepItDry = () => {
-		if (this.countKeys > 0) this.countKeys--;
-		delete this.myObjnow[key];
-		if (!this.myObjnow[key]) return -1;
+		delete this.storage[key];
+		return -1;
 	};
-	
+
 	// * If the object dont exist set it
-	if (!this.myObjnow[key]) {
-		this.memoryCounter = duration;
+	if (!this.storage.hasOwnProperty(key)) {
 		firstTime = setTimeout(keepItDry, duration);
-		this.myObjnow[key] = value;
-		this.countKeys++;
+		this.storage[key] = [value, duration];
 		return false;
 	}
-	
+
 	// * Previously exists
-	if (this.myObjnow[key]) {
-		let updatedTimeStamp = Date.now();
-		let difference = initialTimeStamp - updatedTimeStamp;
+	if (this.storage.hasOwnProperty(key)) {
 		clearTimeout(firstTime);
-		setTimeout(keepItDry, duration + difference);
-		this.myObjnow[key] = value;
+		setTimeout(keepItDry, difference);
+		this.storage[key] = [value, duration];
 		return true;
 	}
 };
 
 /**
  * @param {number} key
- * @return {number} value associated with key
+ * @return {number}
  */
 TimeLimitedCache.prototype.get = function (key) {
-	console.log(key);
-	// * If unexpired key. RETURN the value of that key
-	// * otherwise return -1
-	if (this.myObjnow[key]) {
-		return this.myObjnow[key];
-	}
+	if (this.storage.hasOwnProperty(key)) return this.storage[key];
 	return -1;
 };
 
@@ -58,7 +44,8 @@ TimeLimitedCache.prototype.get = function (key) {
  * @return {number} count of non-expired keys
  */
 TimeLimitedCache.prototype.count = function () {
-	return this.countKeys;
+	let activeKeys = Object.keys(this.storage);
+	return activeKeys.length;
 };
 
 const timeLimitedCache = new TimeLimitedCache();
@@ -67,8 +54,6 @@ timeLimitedCache.set(2, 14, 300);
 timeLimitedCache.set(1, 15, 100);
 timeLimitedCache.get(2);
 timeLimitedCache.count();
-
-
 
 /**
  * @param {Function} fn
@@ -96,12 +81,10 @@ var timeLimit = function (fn, t) {
 	};
 };
 
-
 /**
  * const limited = timeLimit((t) => new Promise(res => setTimeout(res, t)), 100);
  * limited(150).catch(console.log) // "Time Limit Exceeded" at t=100ms
  */
-
 
 /**
  * @param {Function} fn
@@ -144,10 +127,6 @@ var cancellable = function (fn, args, t) {
  *  }, maxT + 15)
  */
 
-
-
-
-
 /**
  * @param {Function} fn
  * @param {Array} args
@@ -159,7 +138,7 @@ let args = [2],
 	t = 20,
 	// t = 100,
 	cancelTimeMs = 50;
-    // cancelTimeMs = 100
+// cancelTimeMs = 100
 let timeOut = 20;
 
 function myExampleFunction(x) {
@@ -219,7 +198,6 @@ setTimeout(function () {
  *  }, maxT + 15)
  */
 
-
 // Given a positive integer millis, write an asynchronous
 // function that sleeps for millis milliseconds. It can resolve any value.
 
@@ -247,18 +225,17 @@ setTimeout(function () {
  * @return {Promise}
  */
 async function sleep(millis) {
-    return new Promise(function(resolve, reject) {
-        setTimeout(function() {
-            resolve("Some")
-        },millis)
-    })
+	return new Promise(function (resolve, reject) {
+		setTimeout(function () {
+			resolve("Some");
+		}, millis);
+	});
 }
 
 /**
  * let t = Date.now()
  * sleep(100).then(() => console.log(Date.now() - t)) // 100
  */
-
 
 // ? 2723. Add Two Promises
 // ? Easy
@@ -287,10 +264,10 @@ function promiseTwo() {
  */
 
 var addTwoPromises = async function (promise1, promise2) {
-    promise1().then(myPromise)
-    promise2().then(myPromise)
+	promise1().then(myPromise);
+	promise2().then(myPromise);
 	return new Promise(function (resolve, reject) {
-        resolve()
+		resolve();
 		// resolve(resultado + resultTwo);
 	});
 };
@@ -340,8 +317,6 @@ console.log(acommulador);
 
 // promise1 and promise2 are promises that resolve with a number
 
-
-
 // * 2623. Memoize
 /**
  * @param {Function} fn
@@ -362,7 +337,7 @@ console.log(acommulador);
 
 // *  Given a function, return a memoized version of that function
 // * memo function === A function that will never be called agin with the same input
-// ! // Possible function 
+// ! // Possible function
 function agrega(numOne, numTwo) {
 	console.log(numOne);
 	return numOne + numTwo;
@@ -379,7 +354,7 @@ function factorial(numero) {
 }
 
 // ! // Possible function  2623. Memoize
- 
+
 function memoize(fn) {
 	let totalFunctionCalls = 1;
 	let argsCache = {};
@@ -388,18 +363,16 @@ function memoize(fn) {
 		if (args.length >= 1) {
 			// args = args.length > 1 ? args.sort((a,b) => a - b): args
 			if (!argsCache.hasOwnProperty(args)) {
-				argsCache[args] = fn(...args)
-				totalFunctionCalls++
-				return argsCache[args]
+				argsCache[args] = fn(...args);
+				totalFunctionCalls++;
+				return argsCache[args];
 			} else {
-				return argsCache[args]
+				return argsCache[args];
 			}
 		}
-		return totalFunctionCalls
+		return totalFunctionCalls;
 	};
-	
 }
-
 
 let useMemoize = memoize(agrega);
 useMemoize(1, 3);
@@ -412,8 +385,6 @@ useMemoize();
 // useMemoize();
 // useMemoize(1, 2);
 // useMemoize();
-
-
 
 //  * Sort an array manually
 // let args = [20,25,6,2,1,5,1,8,123]
@@ -453,15 +424,13 @@ useMemoize();
 
 // * 2623. Memoize
 
-
-
 //  * 2666. Allow One Function Call
 // /**
 //  * @param {Function} fn
 //  * @return {Function}
 //  */
 // var once = function (fn) {
-//     let counter = 0 
+//     let counter = 0
 //     if(counter === 0) {
 //         return function (...args) {
 //             if (counter === 0) {
@@ -469,14 +438,13 @@ useMemoize();
 //                 return fn(...args)
 //             }
 //         };
-//     } 
+//     }
 // };
 
 // let bucket = once((a,b,c) => (a + b + c))
 // console.log(bucket(1,2,3))
 // console.log(bucket(2,3,6))
 // let bucketTwo = bucket
-
 
 /**
  * let fn = (a,b,c) => (a + b + c)
@@ -487,7 +455,6 @@ useMemoize();
  */
 
 //  * 2666. Allow One Function Call Finish
-
 
 //
 // /**
@@ -720,7 +687,6 @@ useMemoize();
 
 // determineBuySell(myArray);
 
-
 // ! Best time to buy and sell
 // *PASSED
 // let myArray = [5, 4, 9, 1, 20, 25, 5];
@@ -763,4 +729,3 @@ useMemoize();
 // }
 
 // ! Best time to buy and sell FINISH
- 
