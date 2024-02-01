@@ -1,3 +1,33 @@
+/**
+ * @param {Function} fn
+ * @param {number} t milliseconds
+ * @return {Function}
+ */
+
+let currentTiemout;
+let previousTime = 0;
+var debounce = function (fn, t) {
+	previousTime = t;
+	clearTimeout(currentTiemout);
+	previousTime = t;
+	return function (...args) {
+		currentTiemout = setTimeout(() => {
+			return fn(...args);
+		}, previousTime);
+	};
+};
+
+
+const log = debounce(console.log, 50);
+setTimeout(()=> {
+	log("Hello"); // cancelled
+},50)
+setTimeout(()=> {
+	log("Hello"); // cancelled
+},75)
+log("Hello"); // Logged at t=100ms
+
+// console.log(previousTime);
 
 
 
