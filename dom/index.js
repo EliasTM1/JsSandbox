@@ -24,10 +24,9 @@ document.body.appendChild(sample);
 let hexValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
 let currenColor = "";
 
-
 function performSubmit(e) {
-    e.preventDefault();
-    currenColor = ""
+	e.preventDefault();
+	currenColor = "";
 	for (let i = 0; i < 6; i++) {
 		currenColor = hexValues[getRandomNumber(0, 13) - 1];
 	}
@@ -40,7 +39,7 @@ function performSubmit(e) {
 function getRandomNumber(min, max) {
 	const randomFloat = Math.random();
 	const randomNumber = Math.floor(randomFloat * (max - min + 1)) + min;
-    console.log(randomNumber)
+	console.log(randomNumber);
 
 	return randomNumber;
 }
@@ -49,66 +48,75 @@ function getRandomNumber(min, max) {
 
 class Person {
 	constructor(name, age, sex) {
-		this.name = name
-		this.age = age
-		this.sex = sex
+		this.name = name;
+		this.age = age;
+		this.sex = sex;
 	}
-	talk = function() {
-		console.log(this)
+	talk = function () {
+		console.log(this);
 		// return this
-	}
+	};
 }
 
 // * Here THIS refers to the object that owns it
 
-let eliasToscano = new Person("Elias", 29, "Male")
-console.log(eliasToscano.talk())
+let eliasToscano = new Person("Elias", 29, "Male");
+console.log(eliasToscano.talk());
 
-let jesus = new Person("Jesus", 2024, "Male")
-console.log(jesus.talk())
+let jesus = new Person("Jesus", 2024, "Male");
+console.log(jesus.talk());
 
-
-function saySomething () {
-	console.log(this)
-	return this
+function saySomething() {
+	console.log(this);
+	return this;
 }
 
 let myObject = {
-	valueOfThis: saySomething
-}
-console.log(myObject.valueOfThis())
-
+	valueOfThis: saySomething,
+};
+console.log(myObject.valueOfThis());
 
 // * in this 2 examples the value of this refers to the element that triggered the event
 
-let buttonNuevo =  document.createElement('button')
-buttonNuevo.value = "MONONUCLEOSIS"
-document.body.appendChild(buttonNuevo)
-buttonNuevo.textContent = "Click me please"
-buttonNuevo.addEventListener('click', function() {
-	console.log(this, "this is the value of this ")
-})
+let buttonNuevo = document.createElement("button");
+buttonNuevo.value = "MONONUCLEOSIS";
+document.body.appendChild(buttonNuevo);
+buttonNuevo.textContent = "Click me please";
+buttonNuevo.addEventListener("click", function () {
+	console.log(this, "this is the value of this ");
+});
 
+let headerNuevo = document.createElement("h1");
+headerNuevo.value = "MONONUCLEOSIS";
+document.body.appendChild(headerNuevo);
+headerNuevo.textContent = "Click me please";
+headerNuevo.addEventListener("click", function () {
+	console.log(this, "this is the value of this ");
+});
 
-let headerNuevo =  document.createElement('h1')
-headerNuevo.value = "MONONUCLEOSIS"
-document.body.appendChild(headerNuevo)
-headerNuevo.textContent = "Click me please"
-headerNuevo.addEventListener('click', function() {
-	console.log(this, "this is the value of this ")
-	
-})
+let mySecondInput = document.createElement("input");
+let mySecondButton = document.createElement("button");
+let debounceBox = document.createElement("div");
+mySecondButton.textContent = "Watch me debounce DEBOUNCE";
+document.body.appendChild(mySecondInput);
+document.body.appendChild(mySecondButton);
+document.body.appendChild(debounceBox);
 
+let currentTimeout 
+let counter = 0
 
-
-
-
-
-
-
-
-
-
+function debounceThis(arg, argOne) {
+	counter++
+	if(currentTimeout) {
+		clearTimeout(currentTimeout)
+	}
+	currentTimeout = setTimeout(() => {
+		console.warn(counter);
+	}, 2000);
+}
+let argument = 0;
+let argDos = 1;
+mySecondButton.addEventListener("click", () => debounceThis(argument, argDos));
 
 // let header, button, input;
 // header = document.createElement("h1");

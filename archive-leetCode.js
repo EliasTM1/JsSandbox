@@ -1,5 +1,86 @@
+
+
+
+//  FINAL SOLUTION BeLOw
+
+
+// var TimeLimitedCache = function () {
+// 	this.storage = {};
+// };
+
+// /**
+//  * @param {number} key
+//  * @param {number} value
+//  * @param {number} duration time until expiration in ms
+//  * @return {boolean} if un-expired key already existed
+//  */
+// TimeLimitedCache.prototype.set = function (key, value, duration) {
+
+// 	// * After the time elapsed the key will be deleted (expired)
+// 	// * If the object dont exist set it
+// 	if (!this.storage.hasOwnProperty(key)) {
+// 		this.firstTimeout = duration;
+// 		firstTime = setTimeout(() => {
+// 			delete this.storage[key] 
+// 			return -1;
+// 		}, duration);
+// 		this.storage[key] = [value, firstTime];
+// 		return false;
+// 	}
+
+// 	// * Previously exists
+// 	if (this.storage.hasOwnProperty(key)) {
+// 		clearTimeout(this.storage[key][1]);
+// 		setTimeout(() => {
+// 			delete this.storage[key] 
+// 			return -1;
+// 		}, duration);
+// 		this.storage[key] = [value, duration];
+// 		return true;
+// 	}
+// };
+
+// /**
+//  * @param {number} key
+//  * @return {number} value associated with key
+//  */
+// TimeLimitedCache.prototype.get = function (key) {
+// 	if (this.storage[key]) {
+//         return this.storage[key][0]
+//     }
+// 	return -1;
+// };
+
+// /**
+//  * @return {number} count of non-expired keys
+//  */
+// TimeLimitedCache.prototype.count = function () {
+// 	let activeKeys = Object.keys(this.storage);
+// 	return activeKeys.length;
+// };
+
+// const timeLimitedCache = new TimeLimitedCache();
+// timeLimitedCache.set(1, 13, 50);
+// timeLimitedCache.set(2, 14, 300);
+// setTimeout(() => {
+// 	timeLimitedCache.set(1, 13, 100);
+// }, 40);
+// setTimeout(() => {
+// 	timeLimitedCache.get(2);
+// }, 800);
+// setTimeout(() => {
+// 	timeLimitedCache.count();
+// }, 850);
+
+//  FINAL SOLUTION BeLOw
+
+
+
+
+
 var TimeLimitedCache = function () {
 	this.storage = {};
+	this.firstTimeout = 0;
 };
 
 /**
@@ -10,14 +91,15 @@ var TimeLimitedCache = function () {
  */
 TimeLimitedCache.prototype.set = function (key, value, duration) {
 	// * After the time elapsed the key will be deleted (expired)
-	let keepItDry = () => {
-		delete this.storage[key];
-		return -1;
-	};
 
 	// * If the object dont exist set it
 	if (!this.storage.hasOwnProperty(key)) {
-		firstTime = setTimeout(keepItDry, duration);
+		this.firstTimeout = duration;
+		firstTime = setTimeout((key) => {
+			this.storage[key] = undefined;		
+			delete this.storage[key] 
+			return -1;
+		}, this.firstTimeout);
 		this.storage[key] = [value, duration];
 		return false;
 	}
@@ -25,7 +107,11 @@ TimeLimitedCache.prototype.set = function (key, value, duration) {
 	// * Previously exists
 	if (this.storage.hasOwnProperty(key)) {
 		clearTimeout(firstTime);
-		setTimeout(keepItDry, difference);
+		setTimeout(() => {
+			this.storage[key] = undefined;		
+			delete this.storage[key] 
+			return -1;
+		}, duration);
 		this.storage[key] = [value, duration];
 		return true;
 	}
@@ -51,9 +137,18 @@ TimeLimitedCache.prototype.count = function () {
 const timeLimitedCache = new TimeLimitedCache();
 timeLimitedCache.set(1, 13, 50);
 timeLimitedCache.set(2, 14, 300);
-timeLimitedCache.set(1, 15, 100);
-timeLimitedCache.get(2);
-timeLimitedCache.count();
+setTimeout(function () {
+	timeLimitedCache.set(1, 15, 100);
+}, 40);
+
+setTimeout(() => {
+	timeLimitedCache.get(2);
+	console.log(timeLimitedCache.get(2))
+}, 800);
+
+setTimeout(() => {
+	timeLimitedCache.count();
+}, 850);
 
 /**
  * @param {Function} fn
