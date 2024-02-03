@@ -1,4 +1,94 @@
 /**
+ * @param {Array} arr
+ * @param {number} size
+ * @return {Array}
+ */
+
+var chunk = function (arr, size) {
+	let temp, copyArgu, maxPossible, productArray;
+	copyArgu = arr.slice();
+	maxPossible = Math.ceil(arr.length / size);
+	productArray = [];
+	if (size === 1) return copyArgu.map((e) => [e]);
+	if(maxPossible === 1) return [arr]
+
+	for (let index = 0; index < maxPossible; index++) {
+		temp = copyArgu.slice(0, size);
+		productArray[index] = temp;
+		copyArgu.splice(0, size);
+	}
+	return productArray;
+};
+
+// let oneToTwelve = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+// let someTestTwo = [8,5,3,2,6]
+// let someTest = [1, 9, 6, 3, 2];
+let someTest = ["1","2","3","4","5"]
+// let product = chunk(someTest, 3);
+let product = chunk(someTest, 2);
+console.log(product);
+
+
+// * Check if an object or an array are empty
+/**
+ * @param {Object|Array} obj
+ * @return {boolean}
+ */
+var isEmpty = function(obj) {
+	if(obj.length) return false
+	for(let llave in obj) {
+		if(llave) break
+		return false 
+	}
+	return true
+};
+
+isEmpty([])
+isEmpty({})
+
+
+// const primerPromesa = () =>
+// 	new Promise((res, rej) =>
+// 		setTimeout(() => res(console.log("Resolves at 1000")), 1000)
+// 	);
+// const segundaPromesa = () =>
+// 	new Promise((res, rej) =>
+// 		setTimeout(() => res(console.log("Resolves at 2000")), 2000)
+// 	);
+// const terceraPromesa = () =>
+// 	new Promise((res, rej) =>
+// 		setTimeout(() => res(console.log("Resolves after 3000")), 3000)
+// 	);
+
+// let arrayDePromesas = [primerPromesa, segundaPromesa, terceraPromesa];
+
+// * 2721 Execute Async myFuncs in parallel
+let prodArr = [];
+var promiseAll = async function (myFuncs) {
+	return new Promise((res, rej) => {
+		myFuncs.forEach((promise, index) => {
+			promise().then((prmisePdt) => {
+				prodArr[index] = prmisePdt;
+				if(prodArr.every(e => e !== null) && prodArr.length === myFuncs.length) res(prodArr);
+			}).catch((error) => {
+				rej(error)
+			});
+		});
+	});
+};
+
+let trash = [
+	() => new Promise((resolve) => setTimeout(() => resolve(4), 50)),
+	() => new Promise((resolve) => setTimeout(() => resolve(10), 10)),
+	() => new Promise((resolve) => setTimeout(() => resolve(16), 1)),
+];
+
+const promise = promiseAll(trash);
+promise.then(console.log); // [42]
+
+
+
+/**
  * @param {Function} fn
  * @param {number} t milliseconds
  * @return {Function}

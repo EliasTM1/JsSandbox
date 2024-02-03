@@ -2,6 +2,7 @@
 let examples = [1, 2, 3, 4, 5, 6, 7];
 // ! SLICE ===========
 // ! Slice take index and the second argument is not inclusive
+// ! return a new array - non mutative
 // * Positives
 console.log(examples.slice());
 console.log(examples.slice(1));
@@ -58,7 +59,7 @@ months2.splice(1, 1, 1000);
 console.log(months2);
 
 const months3 = ["Jan", "March", "April", "June"];
-months3.splice(0, 0, 600);
+months3.splice(0, 0, 600)
 console.log(months3);
 
 // * Inster  eliminating
