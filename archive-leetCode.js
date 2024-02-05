@@ -1,3 +1,55 @@
+
+// let examOneArr = [
+// 	[1, 2, 3],
+// 	[1, 3, 5],
+// 	[1, 5, 9],
+// ];
+// let examOneFunc = (list) => String(list[0]);
+
+// let examTwoArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// let examTwoFunc = (n) => String(n > 5);
+
+// let examThreeArr = [{ id: "1" }, { id: "1" }, { id: "2" }];
+let examThreeArr = [{ id: "1" }, { id: "1" }, { id: "2" }];
+let examThreeFunc = function (item) {
+	return item.id;
+};
+/**
+ * @param {Function} fn
+ * @return {Object}
+ */
+Array.prototype.groupBy = function (fn) {
+	let container,current, key
+	container = {};
+	for (let ct = 0; ct < this.length; ct++) {
+		current = this[ct]
+		key = fn(current);
+		if(!container[key]){
+			container[key] = [current]
+			continue
+		}
+		if(container[key]){
+			container[key] = [...container[key], current]
+		}
+	}
+	return container
+};
+
+examThreeArr.groupBy(examThreeFunc); // {"1":[1],"2":[2],"3":[3]}
+
+
+
+/**
+ * @return {null|boolean|number|string|Array|Object}
+ */
+Array.prototype.last = function () {
+	return this.length ? this[this.length - 1] : -1;
+};
+
+const arr = [1, 2, 3];
+arr.last(); // 3
+
+
 /**
  * @param {Array} arr
  * @param {number} size
