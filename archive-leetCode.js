@@ -1099,3 +1099,87 @@ useMemoize();
 // }
 
 // ! Best time to buy and sell FINISH
+// ? NEXT QUESTION
+// ? --------------------------------------------------------------------------------
+// ! Lego Towers
+// function legoTowers(multipleTowers) {
+// 	let maxNum = Math.max(...multipleTowers);
+// 	let accomulator = 0;
+
+// 	for (let i = 0; i < multipleTowers.length; i++) {
+// 		let current = multipleTowers[i];
+
+//         // * All towers are equal in height
+// 		if (multipleTowers.every((currentVal) => currentVal === maxNum)) {
+//             return 0
+// 		}
+
+//         // * Save the abs difference into accomulator and return the total of pieces you'll need to make all towers the same lenght.
+// 		if (current !== maxNum) {
+// 			accomulator += Math.abs(maxNum - current);
+// 		}
+// 	}
+// 	return accomulator;
+// }
+
+// legoTowers([2 ,3, 5]);
+// legoTowers([10, 10, 10]);
+// ? NEXT QUESTION
+// ? --------------------------------------------------------------------------------
+// * Create a function that will sort an array
+
+// Input: arr = [5, 4, 1, 2, 3], fn = (x) => x
+// Output: [1, 2, 3, 4, 5]
+
+// Input: arr = [{"x": 1}, {"x": 0}, {"x": -1}], fn = (d) => d.x
+// Output: [{"x": -1}, {"x": 0}, {"x": 1}]
+
+// Input: arr = [[3, 4], [5, 2], [10, 1]], fn = (x) => x[1]
+// Output: [[10, 1], [5, 2], [3, 4]]
+
+// ? -------------------------------------------------------------------------------------------
+// function sortMeArray(myDisorderdArr) {
+//     let temp;
+// 	for (let outter = 0; outter < myDisorderdArr.length; outter++) {
+//         for(let inner = 0; inner < myDisorderdArr.length - outter - 1; inner++) {
+//             if(myDisorderdArr[inner] > myDisorderdArr[inner + 1]) {
+//                 temp = myDisorderdArr[inner]
+// 				myDisorderdArr[inner] = myDisorderdArr[inner + 1]
+// 				myDisorderdArr[inner + 1] = temp
+// 			}
+//         }
+// 	}
+// 	return myDisorderdArr
+// }
+
+// function sortBy(arr, fn) {
+// 	arr.sort((a,b) => {
+// 		console.log(arr)
+// 		console.log(fn(a))
+// 		console.log(fn(b))
+// 		return fn(a) - fn(b)
+// 	})
+
+// 	console.log(arr)
+
+// }
+
+// let exampleOne = [5, 4, 1, 2, 3];
+// let eampleTwo = [{ x: 1 }, { x: 0 }, { x: -1 }];
+// let exampleThree = [
+// 	[3, 4],
+// 	[5, 2],
+// 	[10, 1],
+// ];
+
+// let fnOne = (x) => x;
+// let fnTwo = (d) => d.x;
+// let fnThree = (x) => x[1];
+
+// sortBy(exampleOne, fnOne);
+// sortBy(eampleTwo, fnTwo);
+// sortBy(exampleThree, fnThree);
+
+// sortMeArray(exampleOne);
+// sortMeArray(eampleTwo)
+// sortMeArray(exampleThree)
