@@ -1420,3 +1420,187 @@ useMemoize();
 // 	return obj;
 // }
 // };
+
+
+// Given an object or array obj, return a compact object.
+// // A compact object is the same as the original object, except with keys containing falsy values removed. This operation applies to the object and any nested objects. Arrays are considered objects where the indices are keys.
+// // A value is considered falsy when Boolean(value) returns false.
+// // You may assume the obj is the output of JSON.parse. In other words, it is valid JSON.
+
+// // Example 1:
+
+// let objExamOne = [null, 0, false, 1];
+// // Output: [1]
+// // Explanation: All falsy values have been removed from the array.
+// // Example 2:
+
+// let objExamTwo = { a: null, b: [false, 1] };
+// // Output: {"b": [1]}
+// // Explanation: obj["a"] and obj["b"][0] had falsy values and were removed.
+// // Example 3:
+
+// let objExamThree = [null, 0, 5, [0], [false, 16]];
+// // Output: [5, [], [16]]
+// // Explanation: obj[0], obj[1], obj[3][0], and obj[4][0] were falsy and removed.
+
+// let objExamFour = [-1, 0, [0, false], true, null];
+// // * Output: [-1,[],true]
+// // Explanation: obj[0], obj[1], obj[3][0], and obj[4][0] were falsy and removed.
+
+// let objExamCinco = [0, 1, 0, [[[null, 0], false], false], false];
+// let objExamCincoOutput = [1, [[[]]]];
+// // Explanation: obj[0], obj[1], obj[3][0], and obj[4][0] were falsy and removed.
+
+// let objExamSix = [0, 1, 0, [[[null, 0], false], false], false];
+// let objExamCincoSix = [1, [[[]]]];
+// // Explanation: obj[0], obj[1], obj[3][0], and obj[4][0] were falsy and removed.
+
+// // function compactObject(obj) {
+// // 	// * We have 2 possible input Arrs ans Obj
+// // 	// * Seems I believe it would be easier to work each property of an object
+// // 	// * we will convert all arrays to objects
+// // 	let workObj = {};
+// // 	if (Array.isArray(obj)) {
+// // 		for (let i = 0; i < obj.length; i++) {
+// // 			workObj[i] = obj[i];
+// // 		}
+// // 	} else {
+// // 		Object.assign(workObj, obj);
+// // 	}
+
+// // 	for (let key in workObj) {
+// // 		//  * Delete the property from the object
+// // 		if (!workObj[key]) delete workObj[key];
+// // 		//  * Check if the object is an array
+// // 		else if (Array.isArray(workObj[key])) {
+// // 			workObj[key] = workObj[key].filter(Boolean);
+// // 			// hasNestedArrays(workObj[key]);
+// // 		}
+// // 	}
+
+// // 	console.log(Object.values(workObj))
+// // 	// * If originally obj is Arr => []
+// // 	if (Array.isArray(obj)) return Object.values(workObj);
+// // 	return workObj;
+// // 	// * else obj originally an Object => {}
+// // }
+
+// // function hasNestedArrays(arr) {
+// // 	if (!Array.isArray(arr)) {
+// // 		return false;
+// // 	}
+
+// // 	for (let i = 0; i < arr.length; i++) {
+// // 		if (Array.isArray(arr[i])) {
+// // 			arr[i] = [arr[i]
+// // 					.map((element) => element !== Boolean)
+// // 					.filter((elment) => elment === Boolean)]
+// // 					return true;
+// // 		}
+
+// // 		if (hasNestedArrays(arr[i])) {
+// // 			return true;
+// // 		}
+// // 	}
+
+// // 	return false;
+// // }
+
+// // hasNestedArrays([3[false, [4, [false]]]])
+
+// // compactObject(objExamOne)
+// // compactObject(objExamTwo);
+// // compactObject(objExamThree);
+// // compactObject(objExamFour);
+// // compactObject(objExamCinco);
+// // compactObject(objExamSix);
+
+// // * Example 1:
+
+// // Input:
+// let nums = [
+// 		[1, 2],
+// 		[3, 4],
+// 	],
+// 	operation = "Add";
+// // Output: 10
+// // Explanation:
+// // const obj1ExamOne = new ArrayWrapper([1,2]);
+// // const obj2ExamOne = new ArrayWrapper([3,4]);
+// // obj1 + obj2; // * 10
+// // * Example 2:
+
+// let numsTwo = [[23, 98, 42, 70]],
+// 	operationTwo = "String";
+// // Output: // * "[23,98,42,70]"
+// // Explanation:
+// // const obj = new ArrayWrapper([23,98,42,70]);
+// // String(obj); // * "[23,98,42,70]"
+
+// // * Example 3:
+
+// let numsTres = [[], []],
+// 	operationTres = "Add";
+// Output: 0;
+// // const obj1 = new ArrayWrapper([]);
+// // const obj2 = new ArrayWrapper([]);
+// // obj1 + obj2; // * 0
+
+// Explanation: var ArrayWrapper = function (nums) {
+// 	this.nums = nums;
+// };
+
+// /**
+//  * @return {number}
+//  */
+// ArrayWrapper.prototype.valueOf = function () {
+// 	console.log(this.nums);
+// 	return this.nums.reduce((a, b) => a + b);
+// };
+
+// /**
+//  * @return {string}
+//  */
+// ArrayWrapper.prototype.toString = function () {
+// 	let strResult = "";
+// 	let lastEle = this.nums.length - 1;
+
+// 	for (let i = 0; i < this.nums.length; i++) {
+// 		console.log(i);
+// 		if (i === 0) {
+// 			console.log(this.nums);
+// 			strResult = strResult.concat(`[${this.nums[i]},`);
+// 			continue;
+// 		}
+// 		if (i === this.nums.length - 1) {
+// 			strResult = strResult.concat(`${this.nums[i]}]`);
+// 			continue;
+// 		} else {
+// 			strResult = strResult.concat(`${this.nums[i]},`);
+// 			continue;
+// 		}
+// 	}
+
+// 	// this.nums.map((e, index) => {
+// 	// 	switch (index) {
+// 	// 		case 0:
+// 	// 			strResult = strResult.concat(`[${e}`);
+// 	// 			break;
+// 	// 		case lastEle:
+// 	// 			strResult = strResult.concat(`,${e}]`);
+// 	// 			break;
+// 	// 		default:
+// 	// 			strResult = strResult.concat(`,${e}`);
+// 	// 			break;
+// 	// 	}
+// 	// });
+// 	return strResult;
+// };
+
+// // const obj1 = new ArrayWrapper([1, 2]);
+// // const obj2 = new ArrayWrapper([3, 4]);
+// // console.log(obj1.valueOf());
+// // console.log(obj2);
+// const obj1 = new ArrayWrapper([1, 2, 3, 4, 5, 6]);
+
+// console.log(obj1.toString());
